@@ -47,12 +47,13 @@ spec:
           {{- toYaml .Values.deployment.resources | nindent 12 }}
           {{- end }}
         - name: shell
+          image: tutum/curl:trusty
+          imagePullPolicy: IfNotPresent
           securityContext:
             runAsUser: 1
           volumeMounts:
             - name: {{ .Values.deployment.name }}-storage
               mountPath: /var/lib/fortio
-          image: tutum/curl:trusty
           args: ["/bin/sleep", "infinity"]
       {{- if or (.Values.deployment.affinity.node) (or (.Values.deployment.pod) (.Values.deployment.pod_anti)) }}
       affinity:

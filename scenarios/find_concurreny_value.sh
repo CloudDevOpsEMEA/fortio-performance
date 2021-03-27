@@ -65,7 +65,7 @@ for res_s in "${RESPONSE_SIZE_ARRAY[@]}" ;do
     echo "QPS_RESULTS = ${QPS_RESULT_NEW}"
 
     if (( $(echo "$QPS_RESULT_NEW < $QPS_RESULT" | bc -l) )); then
-      "Best result for RESPONSE_SIZE ${res_s} : ${QPS_RESULT} with concurrency ${con}"
+      echo "Best result for RESPONSE_SIZE ${res_s} : ${QPS_RESULT} with concurrency ${con}"
       break
     fi
 

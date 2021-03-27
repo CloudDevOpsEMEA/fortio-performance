@@ -43,7 +43,7 @@ spec:
         resources:
         {{- toYaml .Values.deployment.resources | nindent 10 }}
         {{- end }}
-      {{- if or (.Values.deployment.affinity.nodeAffinity) (or (.Values.deployment.podAffinity) (.Values.deployment.podAntiAffinity)) }}
+      {{- if .Values.deployment.affinity }}
       affinity:
         {{- if .Values.deployment.affinity.nodeAffinity }}
         nodeAffinity:

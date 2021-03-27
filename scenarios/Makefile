@@ -67,6 +67,9 @@ delete-namespace:  ## Delete namespace
 restart:  ## Restart all microservices
 	kubectl -n ${NAMESPACE} rollout restart deploy
 
+wait-ready:  ## Wait for all fortio pods to be ready
+	kubectl -n ${NAMESPACE} wait --for=condition=Ready pods --all
+
 view:  ## View all microservices
 	kubectl -n ${NAMESPACE} get services -o wide
 	kubectl -n ${NAMESPACE} get pods -o wide

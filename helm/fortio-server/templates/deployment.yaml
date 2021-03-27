@@ -40,7 +40,6 @@ spec:
           - containerPort: 8079
             name: grpc-ping
         {{- if .Values.deployment.resources }}
-        {{- if .Values.deployment.resources }}
         resources:
         {{- toYaml .Values.deployment.resources | nindent 10 }}
         {{- end }}

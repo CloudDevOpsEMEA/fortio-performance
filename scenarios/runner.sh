@@ -60,7 +60,9 @@ for res_s in "${RESPONSE_SIZE_ARRAY[@]}" ;do
     LABELS="${LABEL_PREFIX}-conn${con}-resp${res_s}"
     FORTIO_CMD="/usr/bin/fortio load -jitter=true -c=${con} -qps=${QPS} -t=${TIME} -a -r=0.001 -labels=${LABELS} http://fortio-server:8080/echo\?size\=${res_s}"
     echo "kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD}"
-    kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD} | grep "All done"
+    RESULT=$(kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD} | tail -n 6)
+    QPS_RESULT=$(echo $RESULT | sed -n -E 's|.* ([0-9\.]+) qps.*|\1|p')
+    echo "QPS_RESULTS = ${QPS_RESULT}"
   done
 done
 

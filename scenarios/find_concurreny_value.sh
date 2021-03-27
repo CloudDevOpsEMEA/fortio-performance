@@ -6,7 +6,6 @@ FORTIO_CLIENT=$(kubectl get pods -n fortio -l app=fortio-client --output=jsonpat
 
 #CONNECTION_ARRAY=( 16 256 1024 4096 8192 )
 #RESPONSE_SIZE_ARRAY=( 32 512 1024 2048 )
-CONNECTION_ARRAY=( 16 )
 RESPONSE_SIZE_ARRAY=( 32 512 1024 2048 )
 
 printhelp() {
@@ -56,11 +55,22 @@ if [[ -z "${LABEL_PREFIX}" ]]; then
 fi
 
 for res_s in "${RESPONSE_SIZE_ARRAY[@]}" ;do
-  for con in "${CONNECTION_ARRAY[@]}" ; do
+  QPS_RESULT=0
+  for con in  `eval echo {1..10000}` ; do
     LABELS="${LABEL_PREFIX}-conn${con}-resp${res_s}"
     FORTIO_CMD="/usr/bin/fortio load -jitter=true -c=${con} -qps=${QPS} -t=${TIME} -a -r=0.001 -labels=${LABELS} http://fortio-server:8080/echo\?size\=${res_s}"
     echo "kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD}"
-    kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD} | tail -n 6
+    RESULT=$(kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD} | tail -n 6)
+    QPS_RESULT_NEW=$(echo $RESULT | sed -n -E 's|.* ([0-9\.]+) qps.*|\1|p')
+    echo "QPS_RESULTS = ${QPS_RESULT}"
+
+    if (( $(echo "$QPS_RESULT_NEW < $QPS_RESULT" | bc -l) )); then
+      "Best result for RESPONSE_SIZE ${res_s} : ${QPS_RESULT} with concurrency ${con}"
+      break
+    fi
+
+    QPS_RESULT=QPS_RESULT_NEW
+    let "con++"
   done
 done
 

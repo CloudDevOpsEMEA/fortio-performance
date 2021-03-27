@@ -5,8 +5,8 @@ help: ## This help
 
 .DEFAULT_GOAL := help
 
-CLIENT_CHART_DIR := ../../helm/fortio
-SERVER_CHART_DIR := ../../helm/fortio
+CLIENT_CHART_DIR := ../helm/fortio
+SERVER_CHART_DIR := ../helm/fortio
 SCENARIO  := 1pod-samenode-nosidecar-2core
 NAMESPACE := fortio
 

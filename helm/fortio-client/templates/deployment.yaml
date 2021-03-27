@@ -47,7 +47,7 @@ spec:
           {{- toYaml .Values.deployment.resources | nindent 12 }}
           {{- end }}
         - name: shell
-          image: tutum/curl:alpine
+          image: bash:5.1.4
           imagePullPolicy: IfNotPresent
           securityContext:
             runAsUser: 1

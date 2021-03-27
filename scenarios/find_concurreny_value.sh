@@ -69,7 +69,7 @@ for res_s in "${RESPONSE_SIZE_ARRAY[@]}" ;do
       break
     fi
 
-    QPS_RESULT=QPS_RESULT_NEW
+    QPS_RESULT=${QPS_RESULT_NEW}
     let "con++"
   done
 done

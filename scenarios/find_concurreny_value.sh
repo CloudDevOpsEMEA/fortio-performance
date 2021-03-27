@@ -82,7 +82,7 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ;do
     let "CONNECTIONS++"
   done
 
-  echo "Best result for RESPONSE_SIZE ${RESPONSE_SIZE} : ${QPS_RESULT} with concurrency ${CONNECTIONS}"
+  echo "Best result for RESPONSE_SIZE ${RESPONSE_SIZE} : ${QPS_RESULT} with connections/concurrency ${CONNECTIONS}"
 done
 
 echo "Download  results for scenario ${LABEL_PREFIX}"

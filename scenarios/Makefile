@@ -7,16 +7,16 @@ help: ## This help
 
 CLIENT_CHART_DIR := ../helm/fortio-client
 SERVER_CHART_DIR := ../helm/fortio-server
-SCENARIO  := 1pod-samenode-nosidecar-2core
+SCENARIO  := 1pod-samenode-nosidecar
 NAMESPACE := fortio
 
 
 
 install-client:  ## Install fortio client
-	helm install fortio-client ${CLIENT_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
+	helm install fortio-client ${CLIENT_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}/client.yaml || true
 
 upgrade-client:  ## Upgrade fortio client
-	helm upgrade fortio-client ${CLIENT_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
+	helm upgrade fortio-client ${CLIENT_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}/client.yaml || true
 
 uninstall-client:  ## Uninstall fortio client
 	helm uninstall fortio-client --namespace ${NAMESPACE} || true
@@ -26,10 +26,10 @@ reinstall-client: uninstall-client install-client  ## Reinstall fortio client
 
 
 install-server:  ## Install fortio server
-	helm install fortio-server ${SERVER_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
+	helm install fortio-server ${SERVER_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}/server.yaml || true
 
 upgrade-server:  ## Upgrade fortio server
-	helm upgrade fortio-server ${SERVER_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
+	helm upgrade fortio-server ${SERVER_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}/server.yaml || true
 
 uninstall-server:  ## Uninstall fortio server
 	helm uninstall fortio-server --namespace ${NAMESPACE} || true

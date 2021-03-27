@@ -17,7 +17,7 @@ deployment:
             values:
             - fortio-server
             - fortio-client
-          topologyKey: kubernetes.io/hostname
+        topologyKey: kubernetes.io/hostname
 
 hpa:
   enabled: false

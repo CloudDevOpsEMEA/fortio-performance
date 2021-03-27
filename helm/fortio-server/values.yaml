@@ -6,9 +6,9 @@ deployment:
   replicas: 1
   resources: {}
   affinity:
-    node: {}
-    pod: {}
-    pod_anti: {}
+    nodeAffinity: {}
+    podAffinity: {}
+    podAntiAffinity: {}
   tolerations: []
   nodeSelector: {}
 

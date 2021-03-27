@@ -61,7 +61,7 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ;do
   MAX_REACHED=0
   OVERSHOOT=0
   for CONNECTIONS in  `eval echo {1..10000}` ; do
-    if (( ${OVERSHOOT} -ge ${MAX_OVERSHOOT} )); then
+    if [[ ${OVERSHOOT} -ge ${MAX_OVERSHOOT} ]] ; then
       break
     fi
 
@@ -72,7 +72,7 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ;do
     QPS_RESULT_NEW=$(echo $RESULT | sed -n -E 's|.* ([0-9\.]+) qps.*|\1|p')
     echo "QPS_RESULTS = ${QPS_RESULT_NEW}"
 
-    if (( $(echo "$QPS_RESULT_NEW < $QPS_RESULT" | bc -l) )); then
+    if (( $(echo "$QPS_RESULT_NEW < $QPS_RESULT" | bc -l) )) ; then
       let "CONNECTIONS++"
       let "OVERSHOOT++"
       continue

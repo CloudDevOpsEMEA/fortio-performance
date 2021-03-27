@@ -1,0 +1,17 @@
+---
+deployment:
+  pullPolicy: IfNotPresent
+  name: fortio-client
+  namespace: fortio
+  nodeSelector: 
+    nodename: worker1
+  replicas: 1
+  resources:
+    limits:
+      cpu: "2"
+
+istio:
+  envoyStatsInclusionPrefixes: ""
+  sidecarInjection: false
+  sidecarCpuLimit: ""
+  sidecarConcurrency: ""

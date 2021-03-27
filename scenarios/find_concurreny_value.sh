@@ -6,7 +6,7 @@ FORTIO_CLIENT=$(kubectl get pods -n fortio -l app=fortio-client --output=jsonpat
 
 #CONNECTION_ARRAY=( 16 256 1024 4096 8192 )
 #RESPONSE_SIZE_ARRAY=( 32 512 1024 2048 )
-RESPONSE_SIZE_ARRAY=( 32 512 1024 2048 )
+RESPONSE_SIZE_ARRAY=( 32 128 512 1024 2048 )
 
 printhelp() {
    echo "This bash script starts fortio tests"

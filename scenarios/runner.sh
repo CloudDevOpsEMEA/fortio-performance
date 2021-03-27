@@ -4,7 +4,9 @@ TIME=5m
 QPS=0
 FORTIO_CLIENT=$(kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name})
 
-CONNECTION_ARRAY=( 16 256 1024 4096 8192 )
+#CONNECTION_ARRAY=( 16 256 1024 4096 8192 )
+#RESPONSE_SIZE_ARRAY=( 32 512 1024 2048 )
+CONNECTION_ARRAY=( 16 )
 RESPONSE_SIZE_ARRAY=( 32 512 1024 2048 )
 
 printhelp() {
@@ -61,3 +63,8 @@ for res_s in "${RESPONSE_SIZE_ARRAY[@]}" ;do
     kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD} | grep "All done"
   done
 done
+
+
+echo "Download  results for scenario ${LABEL_PREFIX}"
+mkdir -p ./${LABEL_PREFIX}
+kubectl -n fortio cp ${FORTIO_CLIENT}/var/log/fortio ./${LABEL_PREFIX} -c shell

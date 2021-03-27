@@ -8,6 +8,8 @@ FORTIO_CLIENT=$(kubectl get pods -n fortio -l app=fortio-client --output=jsonpat
 #RESPONSE_SIZE_ARRAY=( 32 512 1024 2048 )
 RESPONSE_SIZE_ARRAY=( 32 128 512 1024 2048 )
 
+MAX_OVERSHOOT=3
+
 printhelp() {
    echo "This bash script starts fortio tests"
    echo
@@ -54,24 +56,33 @@ if [[ -z "${LABEL_PREFIX}" ]]; then
     exit 1
 fi
 
-for res_s in "${RESPONSE_SIZE_ARRAY[@]}" ;do
+for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ;do
   QPS_RESULT=0
-  for con in  `eval echo {1..10000}` ; do
-    LABELS="${LABEL_PREFIX}-conn${con}-resp${res_s}"
-    FORTIO_CMD="/usr/bin/fortio load -jitter=true -c=${con} -qps=${QPS} -t=${TIME} -a -r=0.001 -labels=${LABELS} http://fortio-server:8080/echo\?size\=${res_s}"
+  MAX_REACHED=0
+  OVERSHOOT=0
+  for CONNECTIONS in  `eval echo {1..10000}` ; do
+    if (( ${OVERSHOOT} -ge ${MAX_OVERSHOOT} )); then
+      break
+    fi
+
+    LABELS="${LABEL_PREFIX}-conn${CONNECTIONS}-resp${RESPONSE_SIZE}"
+    FORTIO_CMD="/usr/bin/fortio load -jitter=true -c=${CONNECTIONS} -qps=${QPS} -t=${TIME} -a -r=0.001 -labels=${LABELS} http://fortio-server:8080/echo\?size\=${RESPONSE_SIZE}"
     echo "kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD}"
     RESULT=$(kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD} | tail -n 6)
     QPS_RESULT_NEW=$(echo $RESULT | sed -n -E 's|.* ([0-9\.]+) qps.*|\1|p')
     echo "QPS_RESULTS = ${QPS_RESULT_NEW}"
 
     if (( $(echo "$QPS_RESULT_NEW < $QPS_RESULT" | bc -l) )); then
-      echo "Best result for RESPONSE_SIZE ${res_s} : ${QPS_RESULT} with concurrency ${con}"
-      break
+      let "CONNECTIONS++"
+      let "OVERSHOOT++"
+      continue
     fi
 
     QPS_RESULT=${QPS_RESULT_NEW}
-    let "con++"
+    let "CONNECTIONS++"
   done
+
+  echo "Best result for RESPONSE_SIZE ${RESPONSE_SIZE} : ${QPS_RESULT} with concurrency ${CONNECTIONS}"
 done
 
 echo "Download  results for scenario ${LABEL_PREFIX}"

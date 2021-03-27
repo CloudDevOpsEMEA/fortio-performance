@@ -7,7 +7,7 @@ help: ## This help
 
 CLIENT_CHART_DIR := ../helm/fortio-client
 SERVER_CHART_DIR := ../helm/fortio-server
-SCENARIO  := 1pod-samenode-nosidecar
+SCENARIO  := 1pod-samenode-nosidecar-maxcore
 NAMESPACE := fortio
 
 

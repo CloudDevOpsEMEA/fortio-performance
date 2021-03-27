@@ -67,4 +67,4 @@ done
 
 echo "Download  results for scenario ${LABEL_PREFIX}"
 mkdir -p ./${LABEL_PREFIX}
-kubectl -n fortio cp ${FORTIO_CLIENT}/var/log/fortio ./${LABEL_PREFIX} -c shell
+kubectl -n fortio cp ${FORTIO_CLIENT}:/var/log/fortio ./${LABEL_PREFIX} -c shell

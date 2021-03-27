@@ -13,28 +13,28 @@ NAMESPACE := fortio
 
 
 install-client:  ## Install fortio client
-	helm install ${SCENARIO} ${CLIENT_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
+	helm install fortio-client ${CLIENT_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
 
 upgrade-client:  ## Upgrade fortio client
-	helm upgrade ${SCENARIO} ${CLIENT_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
+	helm upgrade fortio-client ${CLIENT_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
 
 uninstall-client:  ## Uninstall fortio client
-	helm uninstall ${SCENARIO} --namespace ${NAMESPACE} || true
+	helm uninstall fortio-client --namespace ${NAMESPACE} || true
 
 reinstall-client: uninstall-client install-client  ## Reinstall fortio client
 
 
 
 install-server:  ## Install fortio server
-	helm install ${SCENARIO} ${SERVER_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
+	helm install fortio-server ${SERVER_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
 
 upgrade-server:  ## Upgrade fortio server
-	helm upgrade ${SCENARIO} ${SERVER_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
+	helm upgrade fortio-server ${SERVER_CHART_DIR} --namespace ${NAMESPACE} --values ./${SCENARIO}.yaml || true
 
 uninstall-server:  ## Uninstall fortio server
-	helm uninstall ${SCENARIO} --namespace ${NAMESPACE} || true
+	helm uninstall fortio-server --namespace ${NAMESPACE} || true
 
-reinstall-server: uninstall-client install-client  ## Reinstall fortio server
+reinstall-server: uninstall-server install-server  ## Reinstall fortio server
 
 
 

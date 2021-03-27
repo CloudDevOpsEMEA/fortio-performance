@@ -10,6 +10,9 @@ SERVER_CHART_DIR := ../helm/fortio-server
 NAMESPACE := fortio
 
 # SCENARIO  := 1pod-samenode-nosidecar-maxcore
+
+# SCENARIO  := 1pod-diffnode-nosidecar-maxcore
+# SCENARIO  := 2pod-diffnode-nosidecar-maxcore
 # SCENARIO  := 3pod-diffnode-nosidecar-maxcore
 
 # SCENARIO  := 1pod-samenode-nosidecar-1core

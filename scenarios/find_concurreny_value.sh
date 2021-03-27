@@ -76,6 +76,8 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ;do
       let "CONNECTIONS++"
       let "OVERSHOOT++"
       continue
+    else 
+      OVERSHOOT=0
     fi
 
     QPS_RESULT=${QPS_RESULT_NEW}

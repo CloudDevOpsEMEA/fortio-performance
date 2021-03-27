@@ -67,4 +67,3 @@ spec:
       nodeSelector:
       {{- toYaml .Values.deployment.node_selector | nindent 8 }}
       {{- end }}
-

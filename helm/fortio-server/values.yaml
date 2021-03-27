@@ -1,0 +1,28 @@
+---
+deployment:
+  pullPolicy: IfNotPresent
+  name: fortio-server
+  namespace: fortio
+  replicas: 1
+  resources: {}
+  affinity:
+    node: {}
+    pod: {}
+    pod_anti: {}
+  tolerations: []
+  nodeSelector: {}
+
+hpa:
+  enabled: false
+  maxReplicas: 3
+  minReplicas: 1
+  targetCPUUtilizationPercentage: 80
+
+istio:
+  envoyStatsInclusionPrefixes: ""
+  # envoyStatsInclusionPrefixes: cluster.outbound
+  sidecarInjection: false
+  sidecarCpuLimit: ""
+  # sidecarCpuLimit: "1"
+  sidecarConcurrency: ""
+  # sidecarConcurrency: 0

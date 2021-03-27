@@ -1,0 +1,26 @@
+---
+deployment:
+  pullPolicy: IfNotPresent
+  name: fortio-client
+  namespace: fortio
+  replicas: 1
+  resources: {}
+  affinity:
+    node: {}
+    pod: {}
+    pod_anti: {}
+  tolerations: []
+  nodeSelector: {}
+
+service:
+  type: NodePort
+  nodePort: 30020
+
+istio:
+  envoyStatsInclusionPrefixes: ""
+  # envoyStatsInclusionPrefixes: cluster.outbound
+  sidecarInjection: false
+  sidecarCpuLimit: ""
+  # sidecarCpuLimit: "1"
+  sidecarConcurrency: ""
+  # sidecarConcurrency: 0

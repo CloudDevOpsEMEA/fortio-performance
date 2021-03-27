@@ -1,0 +1,70 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.deployment.name }}
+  namespace: {{ .Values.deployment.namespace }}
+  labels:
+    app: {{ .Values.deployment.name }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.deployment.name }}
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "{{ .Values.istio.sidecarInjection }}"
+        {{- if .Values.istio.sidecarInjection }}
+        sidecar.istio.io/rewriteAppHTTPProbers: "true"
+        {{- end }}
+        {{- if .Values.istio.envoyStatsInclusionPrefixes }}
+        sidecar.istio.io/statsInclusionPrefixes: "{{ .Values.istio.envoyStatsInclusionPrefixes }}"
+        {{- end }}
+        {{- if .Values.istio.sidecarCpuLimit }}
+        sidecar.istio.io/proxyCPULimit: "{{ .Values.istio.sidecarCpuLimit }}"
+        {{- end }}
+        {{- if .Values.istio.sidecarConcurrency }}
+        proxy.istio.io/config: "{{ .Values.istio.sidecarConcurrency }}"
+        {{- end }}
+      labels:
+        app: {{ .Values.deployment.name }}
+    spec:
+      containers:
+      - name: fortio
+        image: fortio/fortio:latest_release
+        imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+        ports:
+          - containerPort: 8080
+            name: http-fortio
+          - containerPort: 8079
+            name: grpc-ping
+        {{- if .Values.deployment.resources }}
+        {{- if .Values.deployment.resources }}
+        resources:
+        {{- toYaml .Values.deployment.resources | nindent 10 }}
+        {{- end }}
+      {{- if or (.Values.deployment.affinity.node) (or (.Values.deployment.pod) (.Values.deployment.pod_anti)) }}
+      affinity:
+        {{- if .Values.deployment.affinity.node }}
+        nodeAffinity:
+        {{- toYaml .Values.deployment.affinity.node | nindent 10 }}
+        {{- end }}
+        {{- if .Values.deployment.affinity.pod }}
+        podAffinity:
+        {{- toYaml .Values.deployment.affinity.pod | nindent 10 }}
+        {{- end }}
+        {{- if .Values.deployment.affinity.pod_anti }}
+        podAntiAffinity:
+        {{- toYaml .Values.deployment.affinity.pod_anti | nindent 10 }}
+        {{- end }}
+      {{- end }}
+      {{- if .Values.deployment.tolerations }}
+      tolerations:
+      {{- toYaml .Values.deployment.tolerations | nindent 8 }}
+      {{- end }}
+      {{- if .Values.deployment.node_selector }}
+      nodeSelector:
+      {{- toYaml .Values.deployment.node_selector | nindent 8 }}
+      {{- end }}
+

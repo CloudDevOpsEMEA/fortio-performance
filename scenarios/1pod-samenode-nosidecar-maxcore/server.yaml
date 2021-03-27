@@ -4,7 +4,7 @@ deployment:
   name: fortio-server
   namespace: fortio
   nodeSelector: 
-    kubernetes.io/hostname: worker1
+    nodename: worker1
   replicas: 1
   resources: {}
 

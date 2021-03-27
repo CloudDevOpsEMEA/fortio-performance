@@ -7,9 +7,26 @@ help: ## This help
 
 CLIENT_CHART_DIR := ../helm/fortio-client
 SERVER_CHART_DIR := ../helm/fortio-server
-SCENARIO  := 1pod-samenode-nosidecar-maxcore
 NAMESPACE := fortio
 
+# SCENARIO  := 1pod-samenode-nosidecar-maxcore
+# SCENARIO  := 3pod-diffnode-nosidecar-maxcore
+
+# SCENARIO  := 1pod-samenode-nosidecar-1core
+# SCENARIO  := 1pod-samenode-nosidecar-2core
+# SCENARIO  := 1pod-samenode-nosidecar-3core
+
+# SCENARIO  := 1pod-samenode-nosidecar-1core
+# SCENARIO  := 2pod-samenode-nosidecar-1core
+# SCENARIO  := 3pod-samenode-nosidecar-1core
+
+# SCENARIO  := 1pod-diffnode-nosidecar-1core
+# SCENARIO  := 1pod-diffnode-nosidecar-2core
+# SCENARIO  := 1pod-diffnode-nosidecar-3core
+
+# SCENARIO  := 1pod-diffnode-nosidecar-1core
+# SCENARIO  := 2pod-diffnode-nosidecar-1core
+# SCENARIO  := 3pod-diffnode-nosidecar-1core
 
 
 install-client:  ## Install fortio client

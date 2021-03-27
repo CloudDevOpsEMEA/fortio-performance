@@ -38,7 +38,7 @@ reinstall-server: uninstall-client install-client  ## Reinstall fortio server
 
 
 
-namespace:  # Create namespace
+namespace:  ## Create namespace
 	kubectl create namespace ${NAMESPACE} || true
 
 restart:  ## Restart all microservices

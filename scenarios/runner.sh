@@ -15,7 +15,7 @@ printhelp() {
    echo "Syntax: runner.sh --label <label> [--time <time> --qps <qps>]"
    echo " options:"
    echo "   --label|-l <label>  Label prefix to add to each tests"
-   echo "   --time|-t <time>    Time duration of each test"
+   echo "   --time|-t <time>    Time duration of each test (30s, 1m, 2h)"
    echo "   --qps|-q <qps>      Queries per second (0 is try maximum)"
    echo "   --help|-h           Print this help"
    echo

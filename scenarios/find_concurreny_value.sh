@@ -62,7 +62,7 @@ for res_s in "${RESPONSE_SIZE_ARRAY[@]}" ;do
     echo "kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD}"
     RESULT=$(kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD} | tail -n 6)
     QPS_RESULT_NEW=$(echo $RESULT | sed -n -E 's|.* ([0-9\.]+) qps.*|\1|p')
-    echo "QPS_RESULTS = ${QPS_RESULT}"
+    echo "QPS_RESULTS = ${QPS_RESULT_NEW}"
 
     if (( $(echo "$QPS_RESULT_NEW < $QPS_RESULT" | bc -l) )); then
       "Best result for RESPONSE_SIZE ${res_s} : ${QPS_RESULT} with concurrency ${con}"

@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-TIME=5m
+TIME=1m
 QPS=0
 FORTIO_CLIENT=$(kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name})
 
 # CONNECTION_ARRAY=( 16 256 1024 4096 8192 )
-# RESPONSE_SIZE_ARRAY=( 32 128 512 1024 2048 )
-RESPONSE_SIZE_ARRAY=( 32 128 )
+RESPONSE_SIZE_ARRAY=( 32 128 512 1024 2048 )
+# RESPONSE_SIZE_ARRAY=( 32 128 )
 
 MAX_OVERSHOOT=3
 

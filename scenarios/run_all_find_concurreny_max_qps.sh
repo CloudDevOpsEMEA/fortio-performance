@@ -25,6 +25,6 @@ for SCENARIO in "${SCENARIO_ARRAY[@]}" ; do
   sleep 20
   make wait-ready
 
-  ./find_concurreny_max_qps.sh -l ${SCENARIO} -t 30s
+  ./find_concurreny_max_qps.sh -l ${SCENARIO} -t 1m
 
 done

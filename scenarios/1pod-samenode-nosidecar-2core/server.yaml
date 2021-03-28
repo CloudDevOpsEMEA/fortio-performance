@@ -4,11 +4,22 @@ deployment:
   name: fortio-server
   namespace: fortio
   nodeSelector: 
-    nodename: worker1
+    role: worker
   replicas: 1
   resources:
     limits:
       cpu: "2"
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - fortio-server
+            - fortio-client
+        topologyKey: kubernetes.io/hostname
 
 hpa:
   enabled: false

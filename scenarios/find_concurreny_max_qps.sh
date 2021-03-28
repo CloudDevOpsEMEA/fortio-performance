@@ -57,9 +57,10 @@ if [[ -z "${LABEL_PREFIX}" ]]; then
 fi
 
 for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
-  QPS_RESULT=0
+  MAX_QPS_RESULT=0
   MAX_REACHED=0
   OVERSHOOT=0
+  BEST_CONNECTIONS=1
   for CONNECTIONS in  `eval echo {1..10000}` ; do
     if [[ ${OVERSHOOT} -ge ${MAX_OVERSHOOT} ]] ; then
       break
@@ -72,7 +73,7 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
     QPS_RESULT_NEW=$(echo $RESULT | sed -n -E 's|.* ([0-9\.]+) qps.*|\1|p')
     echo "QPS_RESULTS = ${QPS_RESULT_NEW}"
 
-    if (( $(echo "$QPS_RESULT_NEW < $QPS_RESULT" | bc -l) )) ; then
+    if (( $(echo "$QPS_RESULT_NEW < $MAX_QPS_RESULT" | bc -l) )) ; then
       let "CONNECTIONS++"
       let "OVERSHOOT++"
       continue
@@ -80,11 +81,12 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
       OVERSHOOT=0
     fi
 
-    QPS_RESULT=${QPS_RESULT_NEW}
+    MAX_QPS_RESULT=${QPS_RESULT_NEW}
+    BEST_CONNECTIONS=${CONNECTIONS}
     let "CONNECTIONS++"
   done
 
-  echo "Best result for RESPONSE_SIZE ${RESPONSE_SIZE} : ${QPS_RESULT} with connections/concurrency ${CONNECTIONS}"
+  echo "Best result for RESPONSE_SIZE ${RESPONSE_SIZE} : ${MAX_QPS_RESULT} with connections/concurrency ${BEST_CONNECTIONS}"
   sleep 30
 done
 

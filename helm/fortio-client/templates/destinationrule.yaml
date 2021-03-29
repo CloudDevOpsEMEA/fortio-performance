@@ -1,0 +1,13 @@
+---
+{{- if not .Values.istio.mtls }}
+apiVersion: "networking.istio.io/v1beta1"
+kind: "DestinationRule"
+metadata:
+  name: "disable-mtls"
+  namespace: {{ .Values.deployment.namespace }}
+spec:
+  host: "*.{{ .Values.deployment.namespace }}.svc.cluster.local"
+    trafficPolicy:
+      tls:
+        mode: DISABLE
+{{- end }}

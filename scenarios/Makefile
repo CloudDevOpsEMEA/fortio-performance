@@ -74,3 +74,7 @@ wait-ready:  ## Wait for all fortio pods to be ready
 view:  ## View all microservices
 	kubectl -n ${NAMESPACE} get services -o wide
 	kubectl -n ${NAMESPACE} get pods -o wide
+	kubectl -n ${NAMESPACE} get sa -o wide
+
+exec-client:  ## Kubectl exec in client shell container
+	kubectl -n ${NAMESPACE} exec -it `kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}` -c shell -- bash

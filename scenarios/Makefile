@@ -60,6 +60,7 @@ reinstall-server: uninstall-server install-server  ## Reinstall fortio server
 
 create-namespace:  ## Create namespace
 	kubectl create namespace ${NAMESPACE} || true
+	kubectl label namespace ${NAMESPACE} istio-injection=enabled --overwrite
 
 delete-namespace:  ## Delete namespace
 	kubectl delete namespace ${NAMESPACE} || true

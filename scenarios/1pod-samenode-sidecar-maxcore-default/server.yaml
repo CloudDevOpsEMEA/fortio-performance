@@ -1,0 +1,29 @@
+---
+deployment:
+  pullPolicy: IfNotPresent
+  name: fortio-server
+  namespace: fortio
+  nodeSelector: 
+    role: worker
+  replicas: 1
+  resources: {}
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: app
+            operator: In
+            values:
+            - fortio-server
+            - fortio-client
+        topologyKey: kubernetes.io/hostname
+
+hpa:
+  enabled: false
+
+istio:
+  envoyStatsInclusionPrefixes: ""
+  sidecarInjection: true
+  sidecarCpuLimit: ""
+  sidecarConcurrency: ""

@@ -1,0 +1,17 @@
+apiVersion: kops.k8s.io/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: "2021-03-26T21:43:44Z"
+  labels:
+    kops.k8s.io/cluster: aspenmesh.performance.k8s.local
+  name: master-eu-west-3a
+spec:
+  image: 099720109477/ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20210315
+  machineType: t2.2xlarge
+  maxSize: 1
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: master-eu-west-3a
+  role: Master
+  subnets:
+  - eu-west-3a

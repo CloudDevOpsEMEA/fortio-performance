@@ -30,6 +30,7 @@ spec:
       labels:
         app: {{ .Values.deployment.name }}
     spec:
+      serviceAccountName: {{ .Values.deployment.name }}
       containers:
       - name: fortio
         image: fortio/fortio:latest_release

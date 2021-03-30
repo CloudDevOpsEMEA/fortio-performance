@@ -24,3 +24,4 @@ istio:
   sidecarInjection: true
   sidecarCpuLimit: ""
   sidecarConcurrency: ""
+  mtls: false

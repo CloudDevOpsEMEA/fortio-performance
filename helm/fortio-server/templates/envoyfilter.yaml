@@ -1,0 +1,23 @@
+---
+{{- if and (.Values.istio.sidecarInjection) ( .Values.istio.envoyFilter) }}
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: {{ .Values.deployment.name }}-listener-balance
+  namespace: {{ .Values.deployment.namespace }}
+spec:
+  workloadSelector:
+    labels:
+      app: {{ .Values.deployment.name }}
+  configPatches:
+    - applyTo: LISTENER
+      match:
+        context: SIDECAR_INBOUND
+        listener:
+          portNumber: 15006
+      patch:
+        operation: MERGE
+        value:
+          connection_balance_config:
+            exact_balance: {}
+{{- end }}

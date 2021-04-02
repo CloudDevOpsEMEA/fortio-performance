@@ -27,3 +27,4 @@ istio:
   sidecarConcurrency: ""
   # sidecarConcurrency: 0
   mtls: false
+  envoyFilter: false

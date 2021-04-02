@@ -47,9 +47,26 @@ SCENARIO_ARRAY=(
   # "3pod-samenode-sidecar-mtls-1core-default"
 
   # "1pod-diffnode-sidecarclient-1core-default"
-  "1pod-diffnode-sidecarserver-1core-default"
-  "1pod-samenode-sidecarclient-1core-default"
-  "1pod-samenode-sidecarserver-1core-default"
+  # "1pod-diffnode-sidecarserver-1core-default"
+  # "1pod-samenode-sidecarclient-1core-default"
+  # "1pod-samenode-sidecarserver-1core-default"
+
+  "1pod-diffnode-sidecar-1core-tuned"
+  "1pod-diffnode-sidecar-2core-tuned"
+  "1pod-diffnode-sidecar-3core-tuned"
+  "1pod-diffnode-sidecar-maxcore-tuned"
+  "1pod-diffnode-sidecar-mtls-1core-tuned"
+  "1pod-diffnode-sidecar-mtls-2core-tuned"
+  "1pod-diffnode-sidecar-mtls-3core-tuned"
+  "1pod-diffnode-sidecar-mtls-maxcore-tuned"
+  "1pod-samenode-sidecar-1core-tuned"
+  "1pod-samenode-sidecar-2core-tuned"
+  "1pod-samenode-sidecar-3core-tuned"
+  "1pod-samenode-sidecar-maxcore-tuned"
+  "1pod-samenode-sidecar-mtls-1core-tuned"
+  "1pod-samenode-sidecar-mtls-2core-tuned"
+  "1pod-samenode-sidecar-mtls-3core-tuned"
+  "1pod-samenode-sidecar-mtls-maxcore-tuned"
 )
 
 for SCENARIO in "${SCENARIO_ARRAY[@]}" ; do

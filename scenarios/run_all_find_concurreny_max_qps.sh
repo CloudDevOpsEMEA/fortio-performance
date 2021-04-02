@@ -46,7 +46,7 @@ SCENARIO_ARRAY=(
   # "3pod-diffnode-sidecar-mtls-maxcore-default"
   # "3pod-samenode-sidecar-mtls-1core-default"
 
-  "1pod-diffnode-sidecarclient-1core-default"
+  # "1pod-diffnode-sidecarclient-1core-default"
   "1pod-diffnode-sidecarserver-1core-default"
   "1pod-samenode-sidecarclient-1core-default"
   "1pod-samenode-sidecarserver-1core-default"

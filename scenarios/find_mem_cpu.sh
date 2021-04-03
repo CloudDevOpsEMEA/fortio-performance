@@ -81,22 +81,22 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
       QPS_RESULT=$(echo $RESULT | sed -n -E 's|.* ([0-9\.]+) qps.*|\1|p')
       echo "QPS_RESULTS = ${QPS_RESULT}"
 
-      FORTIO_CLIENT_CPU_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_CLIENT_CPU_QUERY} ${PROMETHEUS_URL}/api/v1/query`
+      FORTIO_CLIENT_CPU_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_CLIENT_CPU_QUERY} --data-urlencode time="$(date --date '-15 sec' +%s.%3N)" ${PROMETHEUS_URL}/api/v1/query`
       FORTIO_CLIENT_CPU_STAT=`echo $FORTIO_CLIENT_CPU_QUERY_RESULT | jq ${JQ_EXTRACT} | tr -d '"'`
-      FORTIO_CLIENT_SIDECAR_CPU_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_CLIENT_SIDECAR_CPU_QUERY} ${PROMETHEUS_URL}/api/v1/query`
+      FORTIO_CLIENT_SIDECAR_CPU_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_CLIENT_SIDECAR_CPU_QUERY} --data-urlencode time="$(date --date '-15 sec' +%s.%3N)" ${PROMETHEUS_URL}/api/v1/query`
       FORTIO_CLIENT_SIDECAR_CPU_STAT=`echo $FORTIO_CLIENT_SIDECAR_CPU_QUERY_RESULT | jq ${JQ_EXTRACT} | tr -d '"'`
-      FORTIO_SERVER_CPU_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_SERVER_CPU_QUERY} ${PROMETHEUS_URL}/api/v1/query`
+      FORTIO_SERVER_CPU_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_SERVER_CPU_QUERY} --data-urlencode time="$(date --date '-15 sec' +%s.%3N)" ${PROMETHEUS_URL}/api/v1/query`
       FORTIO_SERVER_CPU_STAT=`echo $FORTIO_SERVER_CPU_QUERY_RESULT | jq ${JQ_EXTRACT} | tr -d '"'`
-      FORTIO_SERVER_SIDECAR_CPU_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_SERVER_SIDECAR_CPU_QUERY} ${PROMETHEUS_URL}/api/v1/query`
+      FORTIO_SERVER_SIDECAR_CPU_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_SERVER_SIDECAR_CPU_QUERY} --data-urlencode time="$(date --date '-15 sec' +%s.%3N)" ${PROMETHEUS_URL}/api/v1/query`
       FORTIO_SERVER_SIDECAR_CPU_STAT=`echo $FORTIO_SERVER_SIDECAR_CPU_QUERY_RESULT | jq ${JQ_EXTRACT} | tr -d '"'`
 
-      FORTIO_CLIENT_MEM_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_CLIENT_MEM_QUERY} ${PROMETHEUS_URL}/api/v1/query`
+      FORTIO_CLIENT_MEM_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_CLIENT_MEM_QUERY} --data-urlencode time="$(date --date '-15 sec' +%s.%3N)" ${PROMETHEUS_URL}/api/v1/query`
       FORTIO_CLIENT_MEM_STAT=`echo $FORTIO_CLIENT_MEM_QUERY_RESULT | jq ${JQ_EXTRACT} | tr -d '"'`
-      FORTIO_CLIENT_SIDECAR_MEM_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_CLIENT_SIDECAR_MEM_QUERY} ${PROMETHEUS_URL}/api/v1/query`
+      FORTIO_CLIENT_SIDECAR_MEM_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_CLIENT_SIDECAR_MEM_QUERY} --data-urlencode time="$(date --date '-15 sec' +%s.%3N)" ${PROMETHEUS_URL}/api/v1/query`
       FORTIO_CLIENT_SIDECAR_MEM_STAT=`echo $FORTIO_CLIENT_SIDECAR_MEM_QUERY_RESULT | jq ${JQ_EXTRACT} | tr -d '"'`
-      FORTIO_SERVER_MEM_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_SERVER_MEM_QUERY} ${PROMETHEUS_URL}/api/v1/query`
+      FORTIO_SERVER_MEM_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_SERVER_MEM_QUERY} --data-urlencode time="$(date --date '-15 sec' +%s.%3N)" ${PROMETHEUS_URL}/api/v1/query`
       FORTIO_SERVER_MEM_STAT=`echo $FORTIO_SERVER_MEM_QUERY_RESULT | jq ${JQ_EXTRACT} | tr -d '"'`
-      FORTIO_SERVER_SIDECAR_MEM_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_SERVER_SIDECAR_MEM_QUERY} ${PROMETHEUS_URL}/api/v1/query`
+      FORTIO_SERVER_SIDECAR_MEM_QUERY_RESULT=`curl -s --data-urlencode query=${FORTIO_SERVER_SIDECAR_MEM_QUERY} --data-urlencode time="$(date --date '-15 sec' +%s.%3N)" ${PROMETHEUS_URL}/api/v1/query`
       FORTIO_SERVER_SIDECAR_MEM_STAT=`echo $FORTIO_SERVER_SIDECAR_MEM_QUERY_RESULT | jq ${JQ_EXTRACT} | tr -d '"'`
 
       echo "client_cpu=${FORTIO_CLIENT_CPU_STAT}, client_sidecar_cpu=${FORTIO_CLIENT_SIDECAR_CPU_STAT}, server_cpu=${FORTIO_SERVER_CPU_STAT}, server_sidecar_cpu=${FORTIO_SERVER_SIDECAR_CPU_STAT}"

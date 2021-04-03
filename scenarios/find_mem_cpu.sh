@@ -59,15 +59,15 @@ fi
 CLIENT_POD=`kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}`
 SERVER_POD=`kubectl get pods -n fortio -l app=fortio-server --output=jsonpath={.items..metadata.name}`
 
-FORTIO_CLIENT_CPU_QUERY="rate(container_cpu_usage_seconds_total{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${CLIENT_POD}\",container=\"fortio\"}[1m])"
 FORTIO_CLIENT_SIDECAR_CPU_QUERY="rate(container_cpu_usage_seconds_total{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${CLIENT_POD}\",container=\"istio-proxy\"}[1m])"
-FORTIO_SERVER_CPU_QUERY="rate(container_cpu_usage_seconds_total{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${SERVER_POD}\",container=\"fortio\"}[1m])"
 FORTIO_SERVER_SIDECAR_CPU_QUERY="rate(container_cpu_usage_seconds_total{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${SERVER_POD}\",container=\"istio-proxy\"}[1m])"
-
-FORTIO_CLIENT_MEM_QUERY="container_memory_usage_bytes{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${CLIENT_POD}\",container=\"fortio\"}"
 FORTIO_CLIENT_SIDECAR_MEM_QUERY="container_memory_usage_bytes{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${CLIENT_POD}\",container=\"istio-proxy\"}"
-FORTIO_SERVER_MEM_QUERY="container_memory_usage_bytes{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${SERVER_POD}\",container=\"fortio\"}"
 FORTIO_SERVER_SIDECAR_MEM_QUERY="container_memory_usage_bytes{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${SERVER_POD}\",container=\"istio-proxy\"}"
+
+FORTIO_CLIENT_CPU_QUERY="rate(container_cpu_usage_seconds_total{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${CLIENT_POD}\",container=\"fortio\"}[1m])"
+FORTIO_SERVER_CPU_QUERY="rate(container_cpu_usage_seconds_total{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${SERVER_POD}\",container=\"fortio\"}[1m])"
+FORTIO_CLIENT_MEM_QUERY="container_memory_usage_bytes{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${CLIENT_POD}\",container=\"fortio\"}"
+FORTIO_SERVER_MEM_QUERY="container_memory_usage_bytes{namespace=\"${FORTIO_NAMESPACE}\",pod=\"${SERVER_POD}\",container=\"fortio\"}"
 
 
 for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do

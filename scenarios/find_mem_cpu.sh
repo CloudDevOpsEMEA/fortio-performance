@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TIME=1m
+TIME=90s
 FORTIO_CLIENT_POD=$(kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name})
 FORTIO_SERVER_POD=$(kubectl get pods -n fortio -l app=fortio-server --output=jsonpath={.items..metadata.name})
 FORTIO_NAMESPACE=fortio
@@ -12,7 +12,7 @@ PROMETHEUS_URL=http://localhost:9090
 # RESPONSE_SIZE_ARRAY=( 32 128 512 1024 2048 )
 RESPONSE_SIZE_ARRAY=( 512 1024 )
 CONNECTIONS_ARRAY=( 2 4 )
-QPS_ARRAY=( 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000 11000 12000 13000 14000 15000 16000 17000 18000 19000 20000 )
+QPS_ARRAY=( 1000 2000 3000 4000 5000 6000 7000 8000 9000 10000 11000 12000 )
 
 MAX_CPU="0.9"
 
@@ -105,7 +105,7 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
       echo "client_mem=${FORTIO_CLIENT_MEM_STAT}, client_sidecar_mem=${FORTIO_CLIENT_SIDECAR_MEM_STAT}, server_mem=${FORTIO_SERVER_MEM_STAT}, server_sidecar_mem=${FORTIO_SERVER_SIDECAR_MEM_STAT}"
       echo "{\"client_mem\": \"${FORTIO_CLIENT_MEM_STAT}\", \"client_sidecar_mem\": \"${FORTIO_CLIENT_SIDECAR_MEM_STAT}\", \"server_mem\": ${FORTIO_SERVER_MEM_STAT}\", \"server_sidecar_mem\": \"${FORTIO_SERVER_SIDECAR_MEM_STAT}\"" > ${LABELS}-memstats.log
 
-      sleep 30
+      sleep 10
     done # QPS
   done # Connections
 done

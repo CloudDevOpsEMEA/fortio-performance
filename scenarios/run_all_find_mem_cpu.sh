@@ -23,6 +23,6 @@ for SCENARIO in "${SCENARIO_ARRAY[@]}" ; do
   sleep 20
   make wait-ready
 
-  ./find_mem_cpu.sh -l ${SCENARIO} -t 1m
+  ./find_mem_cpu.sh -l ${SCENARIO} -t 90s
 
 done

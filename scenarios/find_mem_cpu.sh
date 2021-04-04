@@ -100,10 +100,10 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
       FORTIO_SERVER_SIDECAR_MEM_STAT=`echo $FORTIO_SERVER_SIDECAR_MEM_QUERY_RESULT | jq ${JQ_EXTRACT} | tr -d '"'`
 
       echo "client_cpu=${FORTIO_CLIENT_CPU_STAT}, client_sidecar_cpu=${FORTIO_CLIENT_SIDECAR_CPU_STAT}, server_cpu=${FORTIO_SERVER_CPU_STAT}, server_sidecar_cpu=${FORTIO_SERVER_SIDECAR_CPU_STAT}"
-      echo "{\"client_cpu\": \"${FORTIO_CLIENT_CPU_STAT}\", \"client_sidecar_cpu\": \"${FORTIO_CLIENT_SIDECAR_CPU_STAT}\", \"server_cpu\": \"${FORTIO_SERVER_CPU_STAT}\", \"server_sidecar_cpu\": \"${FORTIO_SERVER_SIDECAR_CPU_STAT}\"" > ${LABELS}-cpustats.json
+      echo "{\"client_cpu\": \"${FORTIO_CLIENT_CPU_STAT}\", \"client_sidecar_cpu\": \"${FORTIO_CLIENT_SIDECAR_CPU_STAT}\", \"server_cpu\": \"${FORTIO_SERVER_CPU_STAT}\", \"server_sidecar_cpu\": \"${FORTIO_SERVER_SIDECAR_CPU_STAT}\"}" > ${LABELS}-cpustats.json
 
       echo "client_mem=${FORTIO_CLIENT_MEM_STAT}, client_sidecar_mem=${FORTIO_CLIENT_SIDECAR_MEM_STAT}, server_mem=${FORTIO_SERVER_MEM_STAT}, server_sidecar_mem=${FORTIO_SERVER_SIDECAR_MEM_STAT}"
-      echo "{\"client_mem\": \"${FORTIO_CLIENT_MEM_STAT}\", \"client_sidecar_mem\": \"${FORTIO_CLIENT_SIDECAR_MEM_STAT}\", \"server_mem\": \"${FORTIO_SERVER_MEM_STAT}\", \"server_sidecar_mem\": \"${FORTIO_SERVER_SIDECAR_MEM_STAT}\"" > ${LABELS}-memstats.json
+      echo "{\"client_mem\": \"${FORTIO_CLIENT_MEM_STAT}\", \"client_sidecar_mem\": \"${FORTIO_CLIENT_SIDECAR_MEM_STAT}\", \"server_mem\": \"${FORTIO_SERVER_MEM_STAT}\", \"server_sidecar_mem\": \"${FORTIO_SERVER_SIDECAR_MEM_STAT}\"}" > ${LABELS}-memstats.json
 
       sleep 10
     done # QPS

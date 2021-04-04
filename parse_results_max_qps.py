@@ -13,9 +13,7 @@ for folder in sorted(os.scandir("./results_max_qps"), key=lambda x: (x.is_dir(),
     
     file_list = Path(folder.path).rglob('*.json')
     for file in sorted(file_list):
-        # because path is object not string
         file_in_str = str(file)
-        # print(file_in_str)
         # print('Scenario: ' + scenario)
         response_size = re.search('resp([0-9]+)\.json', file_in_str).group(1)
         # print('Response Size: ' + response_size)

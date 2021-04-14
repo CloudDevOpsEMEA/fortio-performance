@@ -60,7 +60,7 @@ for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
   MAX_QPS_RESULT=0
   OVERSHOOT=0
   BEST_CONNECTIONS=1
-  for CONNECTIONS in  `eval echo {1..10000}` ; do
+  for CONNECTIONS in  `eval echo {1..8}` ; do
     if [[ ${OVERSHOOT} -ge ${MAX_OVERSHOOT} ]] ; then
       break
     fi

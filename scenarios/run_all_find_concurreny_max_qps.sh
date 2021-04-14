@@ -65,8 +65,36 @@ SCENARIO_ARRAY=(
   # "1pod-samenode-sidecar-maxcore-tuned"
   # "1pod-samenode-sidecar-mtls-1core-tuned"
   # "1pod-samenode-sidecar-mtls-2core-tuned"
-  "1pod-samenode-sidecar-mtls-3core-tuned"
-  "1pod-samenode-sidecar-mtls-maxcore-tuned"
+  # "1pod-samenode-sidecar-mtls-3core-tuned"
+  # "1pod-samenode-sidecar-mtls-maxcore-tuned"
+
+  "1pod-diffnode-sidecar-1core-default"
+  "1pod-diffnode-sidecar-2core-default"
+  "1pod-diffnode-sidecar-3core-default"
+  "1pod-samenode-sidecar-1core-default"
+  "1pod-samenode-sidecar-2core-default"
+  "1pod-samenode-sidecar-3core-default"
+
+  "1pod-diffnode-sidecar-1core-4conc"
+  "1pod-diffnode-sidecar-2core-4conc"
+  "1pod-diffnode-sidecar-3core-4conc"
+  "1pod-samenode-sidecar-1core-4conc"
+  "1pod-samenode-sidecar-2core-4conc"
+  "1pod-samenode-sidecar-3core-4conc"
+
+  "1pod-diffnode-sidecar-1core-6conc"
+  "1pod-diffnode-sidecar-2core-6conc"
+  "1pod-diffnode-sidecar-3core-6conc"
+  "1pod-samenode-sidecar-1core-6conc"
+  "1pod-samenode-sidecar-2core-6conc"
+  "1pod-samenode-sidecar-3core-6conc"
+
+  "1pod-diffnode-sidecar-1core-8conc"
+  "1pod-diffnode-sidecar-2core-8conc"
+  "1pod-diffnode-sidecar-3core-8conc"
+  "1pod-samenode-sidecar-1core-8conc"
+  "1pod-samenode-sidecar-2core-8conc"
+  "1pod-samenode-sidecar-3core-8conc"
 )
 
 for SCENARIO in "${SCENARIO_ARRAY[@]}" ; do

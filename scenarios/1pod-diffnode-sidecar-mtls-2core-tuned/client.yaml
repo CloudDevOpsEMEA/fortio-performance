@@ -27,4 +27,4 @@ istio:
   sidecarCpuLimit: "2"
   sidecarConcurrency: ""
   mtls: true
-  envoyFilter: false
+  envoyFilter: true

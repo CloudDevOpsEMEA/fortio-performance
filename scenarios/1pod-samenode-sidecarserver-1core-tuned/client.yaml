@@ -8,9 +8,9 @@ deployment:
   replicas: 1
   resources:
     limits:
-      cpu: "3"
+      cpu: "1"
   affinity:
-    podAntiAffinity:
+    podAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
@@ -23,8 +23,8 @@ deployment:
 
 istio:
   envoyStatsInclusionPrefixes: ""
-  sidecarInjection: true
-  sidecarCpuLimit: "3"
+  sidecarInjection: false
+  sidecarCpuLimit: "1"
   sidecarConcurrency: ""
-  mtls: true
+  mtls: false
   envoyFilter: true

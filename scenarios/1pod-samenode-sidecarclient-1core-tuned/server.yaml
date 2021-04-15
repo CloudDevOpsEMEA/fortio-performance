@@ -1,16 +1,16 @@
 ---
 deployment:
   pullPolicy: IfNotPresent
-  name: fortio-client
+  name: fortio-server
   namespace: fortio
   nodeSelector: 
     role: worker
   replicas: 1
   resources:
     limits:
-      cpu: "3"
+      cpu: "1"
   affinity:
-    podAntiAffinity:
+    podAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
@@ -21,10 +21,13 @@ deployment:
             - fortio-client
         topologyKey: kubernetes.io/hostname
 
+hpa:
+  enabled: false
+
 istio:
   envoyStatsInclusionPrefixes: ""
-  sidecarInjection: true
-  sidecarCpuLimit: "3"
+  sidecarInjection: false
+  sidecarCpuLimit: "1"
   sidecarConcurrency: ""
-  mtls: true
+  mtls: false
   envoyFilter: true

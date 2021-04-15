@@ -25,7 +25,8 @@ spec:
         sidecar.istio.io/proxyCPULimit: "{{ .Values.istio.sidecarCpuLimit }}"
         {{- end }}
         {{- if .Values.istio.sidecarConcurrency }}
-        proxy.istio.io/config: "{{ .Values.istio.sidecarConcurrency }}"
+        proxy.istio.io/config: |
+          concurrency: {{ .Values.istio.sidecarConcurrency }}
         {{- end }}
       labels:
         app: {{ .Values.deployment.name }}

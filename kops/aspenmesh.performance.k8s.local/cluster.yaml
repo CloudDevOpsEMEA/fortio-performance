@@ -1,0 +1,78 @@
+---
+apiVersion: kops.k8s.io/v1alpha2
+kind: Cluster
+metadata:
+  name: aspenmesh.performance.k8s.local
+spec:
+  api:
+    loadBalancer:
+      class: Classic
+      type: Public
+  authorization:
+    rbac: {}
+  channel: stable
+  cloudLabels:
+    Email: b.vanbos@F5.com
+    Owner: BartVanBos
+    Purpose: PerformanceTesting
+    Team: AspenMesh
+  cloudProvider: aws
+  configBase: s3://aspenmesh-performance-state-store/aspenmesh.performance.k8s.local
+  containerRuntime: docker
+  etcdClusters:
+  - cpuRequest: 200m
+    etcdMembers:
+    - instanceGroup: master-eu-west-3a
+      name: a
+    memoryRequest: 100Mi
+    name: main
+  - cpuRequest: 100m
+    etcdMembers:
+    - instanceGroup: master-eu-west-3a
+      name: a
+    memoryRequest: 100Mi
+    name: events
+  iam:
+    allowContainerRegistry: true
+    legacy: false
+  kubeAPIServer:
+    apiAudiences:
+    - api
+    - istio-ca
+    serviceAccountIssuer: kubernetes.default.svc
+    serviceAccountKeyFile:
+    - /srv/kubernetes/server.key
+    serviceAccountSigningKeyFile: /srv/kubernetes/server.key
+  kubelet:
+    anonymousAuth: false
+  kubernetesApiAccess:
+  - 81.82.50.95/32
+  - 80.201.132.248/32
+  kubernetesVersion: 1.19.9
+  masterInternalName: api.internal.aspenmesh.performance.k8s.local
+  masterPublicName: api.aspenmesh.performance.k8s.local
+  networkCIDR: 172.20.0.0/16
+  networking:
+    calico:
+      majorVersion: v3
+  nonMasqueradeCIDR: 100.64.0.0/10
+  sshAccess:
+  - 81.82.50.95/32
+  - 80.201.132.248/32
+  subnets:
+  - cidr: 172.20.32.0/19
+    name: eu-west-3a
+    type: Private
+    zone: eu-west-3a
+  - cidr: 172.20.0.0/22
+    name: utility-eu-west-3a
+    type: Utility
+    zone: eu-west-3a
+  topology:
+    bastion:
+      idleTimeoutSeconds: 1200
+    dns:
+      type: Public
+    masters: private
+    nodes: private
+---

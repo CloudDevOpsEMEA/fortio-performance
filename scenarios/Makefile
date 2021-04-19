@@ -80,3 +80,7 @@ view:  ## View all microservices
 
 exec-client:  ## Kubectl exec in client shell container
 	kubectl -n ${NAMESPACE} exec -it `kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}` -c shell -- bash
+
+install_setup: create-namespace install-client install-server  ## Install performance setup
+
+uninstall_setup: uninstall-client uninstall-server delete-namespace  ## Uninstall performance setup

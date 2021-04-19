@@ -20,4 +20,14 @@ spec:
         value:
           connection_balance_config:
             exact_balance: {}
+    - applyTo: LISTENER
+      match:
+        context: SIDECAR_OUTBOUND
+        listener:
+          portNumber: 8080
+      patch:
+        operation: MERGE
+        value:
+          connection_balance_config:
+            exact_balance: {}
 {{- end }}

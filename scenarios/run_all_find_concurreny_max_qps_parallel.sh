@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 SCENARIO_ARRAY=(
+  "scenario_sidecars_with_mtls_scale_5"
   "scenario_sidecars_no_mtls_scale_1"
   "scenario_sidecars_with_mtls_scale_1"
   "scenario_sidecars_no_mtls_scale_2"

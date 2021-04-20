@@ -4,8 +4,7 @@ TIME=1m
 QPS=0
 FORTIO_CLIENTS=($(kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}))
 
-# RESPONSE_SIZE_ARRAY=( 32 128 512 1024 2048 )
-RESPONSE_SIZE_ARRAY=( 32 )
+RESPONSE_SIZE_ARRAY=( 32 128 512 1024 2048 )
 
 printhelp() {
    echo "This bash script starts fortio tests"
@@ -54,8 +53,7 @@ if [[ -z "${LABEL_PREFIX}" ]]; then
 fi
 
 for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
-  # for CONNECTIONS in c`eval echo {1..8}` ; do
-  for CONNECTIONS in `eval echo {1..2}` ; do
+  for CONNECTIONS in `eval echo {1..8}` ; do
     CLIENT_INDEX=1
     for FORTIO_CLIENT in "${FORTIO_CLIENTS[@]}" ; do
       LABELS="${LABEL_PREFIX}-conn${CONNECTIONS}-resp${RESPONSE_SIZE}-client${CLIENT_INDEX}"

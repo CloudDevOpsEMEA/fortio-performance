@@ -56,7 +56,7 @@ fi
 for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
   # for CONNECTIONS in  `eval echo {1..8}` ; do
   for CONNECTIONS in  `eval echo {1..2}` ; do
-    for FORTIO_CLIENT in  in "${FORTIO_CLIENTS[@]}" ; do
+    for FORTIO_CLIENT in "${FORTIO_CLIENTS[@]}" ; do
       LABELS="${LABEL_PREFIX}-conn${CONNECTIONS}-resp${RESPONSE_SIZE}-${FORTIO_CLIENT}"
       FORTIO_CMD="/usr/bin/fortio load -jitter=true -c=${CONNECTIONS} -qps=${QPS} -t=${TIME} -a -r=0.001 -labels=${LABELS} http://fortio-server:8080/echo\?size\=${RESPONSE_SIZE}"
       echo "kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD}"
@@ -71,6 +71,6 @@ done
 echo "Download results for scenario ${LABEL_PREFIX}"
 FORTIO_CLIENTS=($(kubectl get pods -n fortio -l app=fortio-client --output=jsonpath={.items..metadata.name}))
 
-for FORTIO_CLIENT in  in "${FORTIO_CLIENTS[@]}" ; do
+for FORTIO_CLIENT in "${FORTIO_CLIENTS[@]}" ; do
   kubectl -n fortio cp ${FORTIO_CLIENT}:/var/lib/fortio ./results/${LABEL_PREFIX} -c shell
 done

@@ -1,18 +1,20 @@
 #!/usr/bin/env bash
 
 SCENARIO_ARRAY=(
-  "1pod-diffnode-nosidecar-1core"
-  "1pod-samenode-nosidecar-1core"
-  "1pod-diffnode-sidecar-1core-default"
-  "1pod-samenode-sidecar-1core-default"
-  "1pod-diffnode-sidecar-mtls-1core-default"
-  "1pod-samenode-sidecar-mtls-1core-default"
-  "1pod-diffnode-sidecarclient-1core-default"
-  "1pod-diffnode-sidecarserver-1core-default"
-  "1pod-samenode-sidecarclient-1core-default"
-  "1pod-samenode-sidecarserver-1core-default"
-  "1pod-diffnode-sidecar-1core-tuned"
-  "1pod-diffnode-sidecar-mtls-1core-tuned"
+  # "1pod-diffnode-nosidecar-1core"
+  # "1pod-samenode-nosidecar-1core"
+  # "1pod-diffnode-sidecar-1core-default"
+  # "1pod-samenode-sidecar-1core-default"
+  # "1pod-diffnode-sidecar-mtls-1core-default"
+  # "1pod-samenode-sidecar-mtls-1core-default"
+  # "1pod-diffnode-sidecarclient-1core-default"
+  # "1pod-diffnode-sidecarserver-1core-default"
+  # "1pod-samenode-sidecarclient-1core-default"
+  # "1pod-samenode-sidecarserver-1core-default"
+  # "1pod-diffnode-sidecar-1core-tuned"
+  # "1pod-diffnode-sidecar-mtls-1core-tuned"
+  "scenario_sidecars_no_mtls_scale_1"
+  "scenario_sidecars_with_mtls_scale_1"
 )
 
 for SCENARIO in "${SCENARIO_ARRAY[@]}" ; do

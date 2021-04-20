@@ -7,7 +7,7 @@ import re
 
 # print("scenario|response_size|requested_qps|actual_qps|num_threads|latency_min|latency_avg|latency_p50|latency_p75|latency_p90|latency_p99|latency_p999|latency_max")
 
-for folder in sorted(os.scandir("./results_max_qps"), key=lambda x: (x.is_dir(), x.name)):
+for folder in sorted(os.scandir("./results_max_qps_dt"), key=lambda x: (x.is_dir(), x.name)):
   if folder.is_dir():
     scenario = os.path.basename(folder.path)
     
@@ -15,7 +15,7 @@ for folder in sorted(os.scandir("./results_max_qps"), key=lambda x: (x.is_dir(),
     for file in sorted(file_list):
         file_in_str = str(file)
         # print('Scenario: ' + scenario)
-        response_size = re.search('resp([0-9]+)\.json', file_in_str).group(1)
+        response_size = re.search('resp([0-9]+)', file_in_str).group(1)
         # print('Response Size: ' + response_size)
 
         with open(file_in_str) as json_file:

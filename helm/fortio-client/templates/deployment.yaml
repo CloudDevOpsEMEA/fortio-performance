@@ -82,5 +82,4 @@ spec:
       {{- end }}
       volumes:
         - name: {{ .Values.deployment.name }}-storage
-          persistentVolumeClaim:
-            claimName: {{ .Values.deployment.name }}
+          emptyDir: {}

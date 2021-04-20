@@ -54,13 +54,15 @@ if [[ -z "${LABEL_PREFIX}" ]]; then
 fi
 
 for RESPONSE_SIZE in "${RESPONSE_SIZE_ARRAY[@]}" ; do
-  # for CONNECTIONS in  `eval echo {1..8}` ; do
-  for CONNECTIONS in  `eval echo {1..2}` ; do
+  # for CONNECTIONS in c`eval echo {1..8}` ; do
+  for CONNECTIONS in `eval echo {1..2}` ; do
+    CLIENT_INDEX=1
     for FORTIO_CLIENT in "${FORTIO_CLIENTS[@]}" ; do
-      LABELS="${LABEL_PREFIX}-conn${CONNECTIONS}-resp${RESPONSE_SIZE}-${FORTIO_CLIENT}"
+      LABELS="${LABEL_PREFIX}-conn${CONNECTIONS}-resp${RESPONSE_SIZE}-client${CLIENT_INDEX}"
       FORTIO_CMD="/usr/bin/fortio load -jitter=true -c=${CONNECTIONS} -qps=${QPS} -t=${TIME} -a -r=0.001 -labels=${LABELS} http://fortio-server:8080/echo\?size\=${RESPONSE_SIZE}"
       echo "kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD}"
       kubectl -n fortio exec -it ${FORTIO_CLIENT} -c fortio -- ${FORTIO_CMD} &
+      let "CLIENT_INDEX++"
     done
     wait
     let "CONNECTIONS++"

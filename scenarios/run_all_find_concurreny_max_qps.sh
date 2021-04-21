@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SCENARIO_ARRAY=(
-  "scenario_sidecars_no_mtls_scale_1"
+  "1pod-diffnode-nosidecar-1core-default"
   # "1pod-diffnode-sidecar-1core-default"
   # "1pod-diffnode-sidecar-1core-4conc-tuned"
   # "1pod-diffnode-sidecar-1core-6conc-tuned"
